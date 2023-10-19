@@ -4,10 +4,15 @@ import { Image } from "react-native";
 import { Text } from "react-native";
 import { Pressable } from "react-native";
 
-export const Header = function ({ lblTop, lblBottom }) {
+export const Header = function ({ lblTop, lblBottom, navigation, route }) {
     return (
         <View style={styles.container}>
-            <Pressable style={styles.left}>
+            <Pressable
+                style={styles.left}
+                onPress={() => {
+                    navigation.goBack();
+                }}
+            >
                 <Image
                     style={{ width: 40, height: 40 }}
                     resizeMode="contain"

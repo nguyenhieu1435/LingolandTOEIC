@@ -1,4 +1,4 @@
-export const dataView = [
+export const dataViewPart01 = [
     {
         id: 1,
         header: "Photographs 01",

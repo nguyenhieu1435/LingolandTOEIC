@@ -4,14 +4,14 @@ import { Header } from "../../components/header";
 import { Item } from "../../components/ItemView";
 import { FlatList } from "react-native";
 import { View } from "react-native";
-import { dataView } from "./dataView";
 
-export const Part02 = function () {
-    const data = dataView;
+export const PartItem = function ({ navigation, route }) {
+    const { name, title, data } = route.params;
+    console.log(data);
     return (
         <SafeAreaView style={styles.container}>
             <View style={{ position: "sticky", top: 0, zIndex: 1 }}>
-                <Header lblTop={"Part 2"} lblBottom={"Hỏi và trả lời"} />
+                <Header lblTop={name} lblBottom={title} navigation={navigation} />
             </View>
             <View style={styles.listItem}>
                 <FlatList
