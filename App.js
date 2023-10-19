@@ -12,12 +12,14 @@ import Training from "./src/components/traning";
 import Vocabulary from "./src/components/vocabulary";
 import { Part01 } from "./src/View/Part01";
 import { Part02 } from "./src/View/Part02";
+import { Part03 } from "./src/View/Part03";
 const Stack = createStackNavigator();
 
 export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="Part03" component={Part03} />
                 <Stack.Screen name="Part02" component={Part02} />
                 <Stack.Screen name="Part01" component={Part01} />
                 <Stack.Screen name="Vocabulary" component={Vocabulary} />
