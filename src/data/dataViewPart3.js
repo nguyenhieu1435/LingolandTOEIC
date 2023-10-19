@@ -19,6 +19,7 @@ export const dataViewPart03 = [
         header: "Conversations 03",
         numberQuestion: 39,
         capacity: "8.7 MB",
+        vip: false,
     },
     {
         id: 4,

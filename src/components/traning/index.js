@@ -5,9 +5,20 @@ import { dataViewPart01 } from "../../data/dataViewPart1";
 import { dataViewPart02 } from "../../data/dataViewPart2";
 import { dataViewPart03 } from "../../data/dataViewPart3";
 import { dataViewPart04 } from "../../data/dataViewPart4";
+import { dataViewPart05 } from "../../data/dataViewPart5";
+import { dataViewPart06 } from "../../data/dataViewPart6";
+import { dataViewPart07 } from "../../data/dataViewPart7";
 
 export default function Training({ navigation }) {
-    const data = [dataViewPart01, dataViewPart02, dataViewPart03, dataViewPart04];
+    const data = [
+        dataViewPart01,
+        dataViewPart02,
+        dataViewPart03,
+        dataViewPart04,
+        dataViewPart05,
+        dataViewPart06,
+        dataViewPart07,
+    ];
     return (
         <View style={{ flex: 1 }}>
             <StatusBar />
