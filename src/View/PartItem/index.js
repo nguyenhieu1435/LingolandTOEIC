@@ -1,13 +1,11 @@
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, View, FlatList } from "react-native";
 import { styles } from "./style";
 import { Header } from "../../components/header";
 import { Item } from "../../components/ItemView";
-import { FlatList } from "react-native";
-import { View } from "react-native";
 
 export const PartItem = function ({ navigation, route }) {
     const { name, title, data } = route.params;
-    console.log(data);
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={{ position: "sticky", top: 0, zIndex: 1 }}>
@@ -28,6 +26,9 @@ export const PartItem = function ({ navigation, route }) {
                                     capacity={item.capacity}
                                     vip={item.vip}
                                     isActive={item.isActive}
+                                    name={name}
+                                    uri={data.uri}
+                                    navigation={navigation}
                                 />
                             </View>
                         );

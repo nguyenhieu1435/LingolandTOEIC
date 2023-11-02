@@ -1,11 +1,12 @@
 export const dataViewPart01 = [
     {
         id: 1,
-        header: "Photographs 01",
+        header: "Part 1 TOEIC ETS 2022",
         numberQuestion: 6,
         capacity: "8.7 MB",
         vip: false,
         isActive: true,
+        uri: "https://65051b38ef808d3c66efc66e.mockapi.io/api/de1-part1"
     },
     {
         id: 2,

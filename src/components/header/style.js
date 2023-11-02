@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const styles = StyleSheet.create({
+export default StyleSheet.create({
     container: {
         margin: 0,
         backgroundColor: "blue",
@@ -23,12 +23,12 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
     },
     lblTop: {
-        fontWeight: "bold",
+        fontWeight: "700",
         fontSize: 25,
         lineHeight: 40,
     },
     lblBottom: {
-        fontWeight: 400,
+        fontWeight: "400",
         fontSize: 15,
     },
 });

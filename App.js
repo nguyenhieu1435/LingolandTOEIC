@@ -9,12 +9,16 @@ import SignUp from "./src/components/signup";
 import Training from "./src/components/traning";
 import Vocabulary from "./src/components/vocabulary";
 import { PartItem } from "./src/View/PartItem";
+import TrainingPart1 from "./src/components/training_part1";
+import { AppRegistry } from "react-native";
 const Stack = createStackNavigator();
 
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Navigator screenOptions={{ headerShown: false }}
+                initialRouteName="TrainingPart1"
+            >
                 <Stack.Screen name="Training" component={Training} />
                 <Stack.Screen name="partItem" component={PartItem} />
                 <Stack.Screen name="Vocabulary" component={Vocabulary} />
@@ -22,6 +26,7 @@ export default function App() {
                 <Stack.Screen name="PickRemindTime" component={PickRemindTime} />
                 <Stack.Screen name="SignIn" component={SignIn} />
                 <Stack.Screen name="SignUp" component={SignUp} />
+                <Stack.Screen name="TrainingPart1" component={TrainingPart1}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

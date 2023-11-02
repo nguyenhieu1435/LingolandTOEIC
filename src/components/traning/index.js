@@ -47,6 +47,13 @@ export default function Training({ navigation }) {
                         </View>
                     </View>
 
+                    <View style={{paddingHorizontal: 10, width: "100%", marginVertical: 15}}>
+                        <Image
+                            source={require("../../../assets/background-traning.png")}
+                            style={{width: "100%", height: 180, borderRadius: 15}}
+                            resizeMode="contain"
+                        />
+                    </View>
                     <Pressable style={styles.buttonGetListDownloaded}>
                         <Image
                             source={require("../../../assets/iconDownload.png")}

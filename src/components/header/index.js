@@ -1,8 +1,5 @@
-import { View } from "react-native";
-import { styles } from "./style";
-import { Image } from "react-native";
-import { Text } from "react-native";
-import { Pressable } from "react-native";
+import { View, Image, Text, Pressable } from "react-native";
+import styles  from "./style";
 
 export const Header = function ({ lblTop, lblBottom, navigation, route }) {
     return (

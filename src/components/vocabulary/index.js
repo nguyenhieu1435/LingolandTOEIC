@@ -1,7 +1,6 @@
 import { View, Text, StatusBar, SafeAreaView, ScrollView, Image } from 'react-native'
 import styles from "./style"
-import React from 'react'
-import { LinearGradient } from 'expo-linear-gradient'
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Vocabulary() {
   return (

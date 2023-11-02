@@ -1,14 +1,24 @@
-import { Text } from "react-native";
-import { View } from "react-native";
-import { styles } from "./style";
-import { Pressable } from "react-native";
-import { TouchableOpacity } from "react-native";
-import { useState } from "react";
-import { Image } from "react-native";
+import { Text, View, Image,  Pressable } from "react-native";
+import { Foundation } from '@expo/vector-icons';
+import styles from "./style";
 
-export const Item = function ({ header, numberQuestion, capacity, vip, isActive }) {
+
+export const Item = function ({name , header, numberQuestion, capacity, vip, isActive, uri, navigation}) {
+
+
+    function handleChoosePart(){
+        if (name === "Part 1"){
+            
+            navigation.navigate("TrainingPart1", {
+                name: name,
+            })
+        }
+    }
+
     return (
-        <TouchableOpacity style={[styles.container]}>
+        <Pressable style={[styles.container]}
+            onPress={()=> handleChoosePart()}
+        >
             <Text style={styles.header}>{header}</Text>
             <View style={{ flexDirection: "row", alignItems: "center", height: 40 }}>
                 <Text style={styles.numberQuestion}>{numberQuestion}</Text>
@@ -18,22 +28,20 @@ export const Item = function ({ header, numberQuestion, capacity, vip, isActive 
             {isActive ? (
                 <View style={{ flexDirection: "row" }}>
                     <View style={{ height: 30 }}>
-                        <Image
-                            source={require("../../../assets/graph.png")}
-                            style={{ width: 28, height: 28 }}
-                            resizeMode="contain"
+                        <Foundation name="graph-horizontal" size={24} color="#000" 
+                            style={{transform: "rotate(-90deg)"}}
                         />
                     </View>
                     <Text
                         style={{
                             lineHeight: 30,
                             fontSize: 17,
-                            fontWeight: 500,
+                            fontWeight: 400,
                             paddingHorizontal: 10,
                             color: "#858585",
                         }}
                     >
-                        Điểm cao: 1 / {numberQuestion}
+                        Điểm cao: 2 / {numberQuestion}
                     </Text>
                 </View>
             ) : null}
@@ -60,22 +68,22 @@ export const Item = function ({ header, numberQuestion, capacity, vip, isActive 
                 </View>
 
                 <View style={{ flexDirection: "row" }}>
-                    <TouchableOpacity style={{ paddingHorizontal: 10 }}>
+                    <Pressable style={{ paddingHorizontal: 10 }}>
                         <Image
                             source={require("../../../assets/playicon.png")}
                             style={{ width: 40, height: 40 }}
                             resizeMode="contain"
                         />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
+                    </Pressable>
+                    <Pressable>
                         <Image
                             source={require("../../../assets/lockicon.png")}
                             style={{ width: 40, height: 40 }}
                             resizeMode="contain"
                         />
-                    </TouchableOpacity>
+                    </Pressable>
                 </View>
             </View>
-        </TouchableOpacity>
+        </Pressable>
     );
 };
