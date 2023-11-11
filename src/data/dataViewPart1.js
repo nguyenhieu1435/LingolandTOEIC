@@ -1,7 +1,7 @@
 export const dataViewPart01 = [
     {
         id: 1,
-        header: "Part 1 TOEIC ETS 2022",
+        header: "Photographs 01",
         numberQuestion: 6,
         capacity: "8.7 MB",
         vip: false,
@@ -14,12 +14,14 @@ export const dataViewPart01 = [
         numberQuestion: 6,
         capacity: "8.7 MB",
         vip: false,
+        uri: "https://65051b38ef808d3c66efc66e.mockapi.io/api/de1-part1"
     },
     {
         id: 3,
         header: "Photographs 03",
         numberQuestion: 6,
         capacity: "8.7 MB",
+        uri: "https://65051b38ef808d3c66efc66e.mockapi.io/api/de1-part1"
     },
     {
         id: 4,
@@ -27,6 +29,7 @@ export const dataViewPart01 = [
         numberQuestion: 6,
         capacity: "8.7 MB",
         vip: false,
+        uri: "https://65051b38ef808d3c66efc66e.mockapi.io/api/de1-part1"
     },
     {
         id: 5,
@@ -34,6 +37,7 @@ export const dataViewPart01 = [
         numberQuestion: 6,
         capacity: "8.7 MB",
         vip: true,
+        uri: "https://65051b38ef808d3c66efc66e.mockapi.io/api/de1-part1"
     },
     {
         id: 6,
@@ -41,6 +45,7 @@ export const dataViewPart01 = [
         numberQuestion: 6,
         capacity: "8.7 MB",
         vip: true,
+        uri: "https://65051b38ef808d3c66efc66e.mockapi.io/api/de1-part1"
     },
     {
         id: 7,
@@ -48,6 +53,7 @@ export const dataViewPart01 = [
         numberQuestion: 6,
         capacity: "8.7 MB",
         vip: true,
+        uri: "https://65051b38ef808d3c66efc66e.mockapi.io/api/de1-part1"
     },
     {
         id: 8,
@@ -55,6 +61,7 @@ export const dataViewPart01 = [
         numberQuestion: 6,
         capacity: "8.7 MB",
         vip: true,
+        uri: "https://65051b38ef808d3c66efc66e.mockapi.io/api/de1-part1"
     },
     {
         id: 9,
@@ -62,6 +69,7 @@ export const dataViewPart01 = [
         numberQuestion: 6,
         capacity: "8.7 MB",
         vip: true,
+        uri: "https://65051b38ef808d3c66efc66e.mockapi.io/api/de1-part1"
     },
     {
         id: 10,
@@ -69,5 +77,6 @@ export const dataViewPart01 = [
         numberQuestion: 6,
         capacity: "8.7 MB",
         vip: true,
+        uri: "https://65051b38ef808d3c66efc66e.mockapi.io/api/de1-part1"
     },
 ];

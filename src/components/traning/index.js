@@ -143,7 +143,7 @@ export default function Training({ navigation }) {
                             <TraningPartItem
                                 title="Các part của phần nghe"
                                 name="Phần nghe"
-                                widthBoxIcon="70%"
+                                widthBoxIcon="80%"
                                 backgroundColor={["#304A61", "#304A61"]}
                                 iconPath={require("../../../assets/iconTrainingAnother1.png")}
                             />

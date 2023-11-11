@@ -8,8 +8,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
 
-export default function AudioCustom({uri}) {
-    const [isPause, setIsPause] = useState(false);
+export default function AudioCustom({uri, isPause, setIsPause}) {
+
     const [audio, setAudio]= useState(null)
     const positionBottomModelSpeed = useRef(new Animated.Value(-200)).current;
     const positionRightModelSpeed2 = useRef(new Animated.Value(-200)).current;
@@ -22,15 +22,14 @@ export default function AudioCustom({uri}) {
     useEffect(()=>{
         const fnSetUp = async () => {
             const {sound, status} = await Audio.Sound.createAsync({uri: uri});
-            sound.setIsLoopingAsync(false);
-            sound.setVolumeAsync(1);
-            sound.setRateAsync(speedCurrent);
-        
             while(true){
                 if (status.isLoaded){
                     break;
                 }
             }
+            sound.setIsLoopingAsync(false);
+            sound.setVolumeAsync(1);
+            sound.setRateAsync(speedCurrent);
            
             sound.playAsync();
             setAudio(sound);
@@ -56,9 +55,12 @@ export default function AudioCustom({uri}) {
                         
                         setPercentProgress(Math.floor((status.positionMillis / status.durationMillis)*100));
                         setCurrentSecond(Math.floor((status.positionMillis-0) / 1000));
-                    } else {
+                    } 
+                    if (!status.isPlaying && !isPause){
                         setCurrentSecond(0);
                         setPercentProgress(0);
+                        audio.replayAsync();
+                        audio.pauseAsync();
                         setIsPause(true);
                         clearInterval(refIdAudio.current);
                     }
@@ -68,6 +70,15 @@ export default function AudioCustom({uri}) {
         return ()=> clearInterval(refIdAudio.current);
     }, [audio, isPause])
 
+    useEffect(()=>{
+        if (audio){
+            if (isPause){
+                audio.pauseAsync();
+            } else {
+                audio.playAsync();
+            }
+        }
+    },[isPause])
    
     function handleToggleSpeed(){
         if (toggleSpeed){
@@ -125,7 +136,7 @@ export default function AudioCustom({uri}) {
     return (
         <View style={{position: 'relative', backgroundColor: "#fff", flexDirection: "row", alignItems: "center"}}>
             <View style={{flexDirection: "row", alignItems: "center"}}>
-                <Pressable style={{paddingVertical: 5, paddingHorizontal: 8}}
+                <Pressable style={{paddingVertical: 5, paddingLeft: 8}}
                     onPress={()=> {
                         audio.getStatusAsync().then((status)=>{
                             audio.setPositionAsync(status.positionMillis - 5000);
@@ -138,7 +149,7 @@ export default function AudioCustom({uri}) {
                 <Pressable style={{paddingVertical: 5, paddingHorizontal: 10}}
                     onPress={()=> {
                         if (isPause){
-                            audio.replayAsync();
+                            audio.playAsync();
                         } else {
                             audio.pauseAsync();
                         
@@ -155,7 +166,7 @@ export default function AudioCustom({uri}) {
                     }
                 
                 </Pressable>
-                <Pressable style={{paddingVertical: 5, paddingHorizontal: 8}}
+                <Pressable style={{paddingVertical: 5, paddingRight: 8}}
                     onPress={()=> {
                         audio.getStatusAsync().then((status)=>{
                             audio.setPositionAsync(status.positionMillis + 5000);
@@ -173,7 +184,7 @@ export default function AudioCustom({uri}) {
 
                         </View>
                         <View style={{width: `${percentProgress}%`, position: "relative"}}>
-                            <Text style={{right: -5, top: -10,position: "absolute", color: "#fff", paddingLeft: 5
+                            <Text style={{right: -14, top: -10,position: "absolute", color: "#fff", paddingLeft: 5
                             , backgroundColor: "#0081D4", paddingVertical: 2, paddingHorizontal: 5, borderRadius: 5
                             , fontSize: 13, fontWeight:"500" , zIndex: 2, width: 45}}
                             

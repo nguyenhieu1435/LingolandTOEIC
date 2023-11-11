@@ -29,7 +29,7 @@ export default function TraningPartItem({
                         width: widthBoxIcon,
                         flexDirection: "row",
                         paddingVertical: 7,
-                        paddingHorizontal: 15,
+                        paddingHorizontal: 10,
                         borderRadius: 8,
                         alignItems: "center",
                         justifyContent: "center",
@@ -42,7 +42,7 @@ export default function TraningPartItem({
                     <Image
                         source={iconPath}
                         resizeMode="contain"
-                        style={{ width: 25, height: 20, marginHorizontal: 5 }}
+                        style={{ width: 20, height: 20, marginRight: 5 }}
                     />
                     <Text style={{ color: "#fff", fontSize: 13, fontWeight: "700", marginLeft: 2 }}>
                         {name}
