@@ -47,9 +47,11 @@ const part3Slice = createSlice({
             if (action.payload?.index >= state.questions.length){
                 return;
             }
-
+            console.log(action.payload)
+           
             // need logic here
             state.questions[action.payload.index].questionList[action.payload.indexInQuestionList].yourAnswer = action.payload.userAnswer;
+            console.log(state.questions[action.payload.index].questionList[action.payload.indexInQuestionList].yourAnswer)
         }
     },
     extraReducers: builder => {

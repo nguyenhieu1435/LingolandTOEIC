@@ -39,7 +39,8 @@ export default function Question({partName, questions, numberQuestion, elementIn
                 setUserAnswer(state.questions[elementIndex].yourAnswer);
             }
         } else if (partName === "part3"){
-            if (state.questions[elementIndex].yourAnswer && elementIndex >= 0 && elementIndex < state.questions.length){
+          
+            if (state.questions[elementIndex].questionList[indexOfQuestionDiferPart12].yourAnswer && elementIndex >= 0 && elementIndex < state.questions.length){
                 setUserAnswer(state.questions[elementIndex]?.questionList[indexOfQuestionDiferPart12]?.yourAnswer)
             }
         }
