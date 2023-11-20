@@ -33,7 +33,7 @@ export default function TrainingPart3({navigation, route}) {
     const [questionThreeSelected, setQuestionThreeSelected] = useState(false);
     const [allQuestionSelected, setAllQuestionSelected] = useState(false);
     const [isSuggestEngsub, setIsSuggestEngsub] = useState(true);
-    const [showSuggest, setShowSuggest] = useState(false);
+    const [showSuggest, setShowSuggest] = useState(true);
 
     useEffect(()=>{
         if (allQuestionSelected){
@@ -186,7 +186,7 @@ export default function TrainingPart3({navigation, route}) {
                         >
                             <ScrollView style={{flex: 1, }}>
                                 <View
-                                    style={{backgroundColor: "#4AB542", borderRadius: 15}}
+                                    style={{backgroundColor: "#4AB542", borderRadius: 15, overflow: 'hidden'}}
                                 >
                                     <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"
                                     , paddingHorizontal: 10, paddingVertical: 10}}>
@@ -215,12 +215,16 @@ export default function TrainingPart3({navigation, route}) {
                                                 {
                                                     showSuggest
                                                     ?
-                                                    <Pressable>
-                                                        <FontAwesome name="angle-down" size={24} color="white" />
+                                                    <Pressable
+                                                        onPress={()=>setShowSuggest(false)}
+                                                    >
+                                                        <FontAwesome name="angle-up" size={24} color="white" />
                                                     </Pressable>
                                                     :
-                                                    <Pressable>
-                                                        <FontAwesome name="angle-up" size={24} color="white" />
+                                                    <Pressable
+                                                        onPress={()=>setShowSuggest(true)}
+                                                    >
+                                                        <FontAwesome name="angle-down" size={24} color="white" />
                                                     </Pressable>
                                                 }
                                             
@@ -228,44 +232,47 @@ export default function TrainingPart3({navigation, route}) {
                                         </View>
                                     </View>
 
-                                    <View style={{padding: 15, backgroundColor: "#fff"}}>
-                                        {
-                                            isSuggestEngsub
-                                            ?
-                                            data.transcriptEN?.map((item, index)=>{
-                                            
-                                                return (
-                                                    <View key={index} style={{marginBottom: 10, flexDirection: "row"}}>
-                                                        <Text>
-                                                            <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{item.username}  </Text>
-                                                            {
-                                                                item?.spoilerNumber &&
-                                                                <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
-                                                            }
-                                                            <Text style={{fontSize: 15, color: "#000", flex: 1}}>{item.talk}</Text>
-                                                        </Text>
-                                                    </View>
-                                                )
-                                            
-                                            })
-                                            :
-                                            data.transcriptVN?.map((item, index)=>{
-                                                return (
-                                                    <View key={index} style={{marginBottom: 10, flexDirection: "row"}}>
-                                                        <Text>
-                                                            <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{item.username}  </Text>
-                                                            {
-                                                                item?.spoilerNumber &&
-                                                                <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
-                                                            }
-                                                            <Text style={{fontSize: 15, color: "#000", flex: 1}}>{item.talk}</Text>
-                                                        </Text>
-                                                    </View>
-                                                )
-                                            
-                                            })
-                                        }
-                                    </View>
+                                    {
+                                        showSuggest &&
+                                        <View style={{padding: 15, backgroundColor: "#fff"}}>
+                                            {
+                                                isSuggestEngsub
+                                                ?
+                                                data.transcriptEN?.map((item, index)=>{
+                                                
+                                                    return (
+                                                        <View key={index} style={{marginBottom: 10, flexDirection: "row"}}>
+                                                            <Text>
+                                                                <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{item.username}  </Text>
+                                                                {
+                                                                    item?.spoilerNumber &&
+                                                                    <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
+                                                                }
+                                                                <Text style={{fontSize: 15, color: "#000", flex: 1}}>{item.talk}</Text>
+                                                            </Text>
+                                                        </View>
+                                                    )
+                                                
+                                                })
+                                                :
+                                                data.transcriptVN?.map((item, index)=>{
+                                                    return (
+                                                        <View key={index} style={{marginBottom: 10, flexDirection: "row"}}>
+                                                            <Text>
+                                                                <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{item.username}  </Text>
+                                                                {
+                                                                    item?.spoilerNumber &&
+                                                                    <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
+                                                                }
+                                                                <Text style={{fontSize: 15, color: "#000", flex: 1}}>{item.talk}</Text>
+                                                            </Text>
+                                                        </View>
+                                                    )
+                                                
+                                                })
+                                            }
+                                        </View>
+                                    }
                                 </View>
                             </ScrollView>
 
