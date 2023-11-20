@@ -6,7 +6,9 @@ import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react'
 
-export default function RadioButton({character, question, systemAnswer, userAnswer, setUserAnswer, questionIsSelected}) {
+export default function RadioButton({character, question, systemAnswer, userAnswer, setUserAnswer, questionIsSelected,
+    partName
+    }) {
 
     function handleSelectAnswer(){
         if (userAnswer || questionIsSelected){
@@ -52,6 +54,10 @@ export default function RadioButton({character, question, systemAnswer, userAnsw
                         ?
                         <Text style={{fontSize: 17, color: getColorForAnswer("#333"), fontWeight: "500"}}>{". "+ question.name}</Text>
                         :
+                        partName != "part1" && partName != "part2"
+                        ?
+                        <Text style={{fontSize: 17, color: "#333", fontWeight: "500"}}>{". "+ question.name}</Text>
+                        :
                         <Text></Text>
                     }
                 </View>
@@ -67,8 +73,6 @@ export default function RadioButton({character, question, systemAnswer, userAnsw
                     <AntDesign name={userAnswer == systemAnswer ? "check" : "close"} 
                     size={24} color={userAnswer == systemAnswer ? "#59BB51" : "#F44336"}
                     style={{marginRight: 15, width: 24}}/>
-                   
-                  
                 }
             </View>
             {

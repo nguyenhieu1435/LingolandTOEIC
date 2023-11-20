@@ -1,54 +1,87 @@
 import { View, Text, Pressable, Animated, LayoutAnimation } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
 import RadioButton from '../radio_button';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { set } from 'react-hook-form';
 import getAnswerCharacterByIndex from '../../utils/getAnswerCharacterByIndex';
 import { useDispatch } from 'react-redux';
 import { setAnswerByIndex } from '../../redux/slices/part1Training';
 import { useSelector } from 'react-redux';
 import getSliceNameByPartName from '../../utils/getSliceNameByPartName';
-
+import { setAnswerByIndexPart2 } from '../../redux/slices/part2Training';
+import { MaterialIcons } from '@expo/vector-icons';
+import { setAnswerByIndexPart3 } from '../../redux/slices/part3Training';
 
 
 export default function Question({partName, questions, numberQuestion, elementIndex, 
-    questionIsSelected, setQuestionSelected}) {
+    questionIsSelected, setQuestionSelected, indexOfQuestionDiferPart12}) {
     const dispatch = useDispatch();
     const [showContent, setShowContent] = useState(true);
     const [userAnswer, setUserAnswer] = useState(null);
+    // get state from name in redux store, if add new part, go to getSliceNameByPartName.js to add new case
     const state = useSelector(state => state[getSliceNameByPartName(partName)])
 
-
+    // dropdown question content hide/show
     function handleToggleContent(){
        setShowContent(!showContent);
     }
+   
 
     useLayoutEffect(()=>{
+        // set user answer for question if it has been choosen
+        // add else if, if add new part
         if (partName === "part1"){
            
             if (state.questions[elementIndex].yourAnswer && elementIndex >= 0 && elementIndex < state.questions.length){
                 setUserAnswer(state.questions[elementIndex].yourAnswer);
             }
+        } else if (partName === "part2"){
+            if (state.questions[elementIndex].yourAnswer && elementIndex >= 0 && elementIndex < state.questions.length){
+                setUserAnswer(state.questions[elementIndex].yourAnswer);
+            }
+        } else if (partName === "part3"){
+            if (state.questions[elementIndex].yourAnswer && elementIndex >= 0 && elementIndex < state.questions.length){
+                setUserAnswer(state.questions[elementIndex]?.questionList[indexOfQuestionDiferPart12]?.yourAnswer)
+            }
         }
     }, [elementIndex])
    
-
+    // redux reducer, set question, which is selected by user 
+    // add else if, if add new part
     useEffect(()=>{
         if (userAnswer){
             setQuestionSelected(true);
             if (partName === "part1"){
+                // setAnswerByIndex only use for part1
                 dispatch(setAnswerByIndex({index: elementIndex, userAnswer: userAnswer}))
+            } else if (partName === "part2"){
+                dispatch(setAnswerByIndexPart2({index: elementIndex, userAnswer: userAnswer}))
+            } else if (partName === "part3"){
+                dispatch(setAnswerByIndexPart3({index: elementIndex, userAnswer: userAnswer
+                    , indexInQuestionList: indexOfQuestionDiferPart12}))
             }
+
         }
+        // userAnswer is local state, useAnswer store user answer for question (String)
     }, [userAnswer])
 
     return (
-        <View style={{marginTop: 15, borderRadius: 10, overflow: 'hidden', backgroundColor: "#fff"}}>
+        <View style={{marginTop: 15, borderRadius: 10, overflow: 'hidden', backgroundColor: "#fff", shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.20,
+        shadowRadius: 1.41,
+        
+        elevation: 2,}}>
             <View style={{height: 50, width: "100%", backgroundColor: "#2196F3"
             , flexDirection: "row", alignItems: 'center', justifyContent: "space-between"
             , paddingHorizontal: 10, }}>
-                <Text style={{fontSize: 16, fontWeight: "600", color: "#fff"}}>{numberQuestion}</Text>
+                <View>
+                    <Text style={{fontSize: 16, fontWeight: "600", color: "#fff"}}>{numberQuestion} 
+                        {(questions?.questionNameEN && questionIsSelected) || (partName != "part1" && partName != "part2") ? `. ${questions.questionNameEN}` : ""}
+                    </Text>
+                </View>
                 <Pressable style={{marginRight: 10}}
                     onPress={handleToggleContent}
                 >
@@ -64,6 +97,18 @@ export default function Question({partName, questions, numberQuestion, elementIn
                 
                 </Pressable>
             </View>
+            {
+                questions?.questionNameVN && questionIsSelected && showContent &&
+                <View style={{flexDirection: "row", backgroundColor: "#EAF4FB", paddingVertical: 10}}>
+                    <MaterialIcons name="translate" size={20} color="#2A96DB"
+                        style={{marginHorizontal: 10, paddingVertical: 8}}
+                    />
+                    <Text style={{fontSize: 16, color: "#2A96DB", flexShrink: 1, flexWrap: 'wrap'}}>
+                        {questions.questionNameVN}
+                    </Text>
+
+                </View>
+            }
         
             <Animated.View style={{ height: showContent ? null : 0 }}>
                 {
@@ -72,6 +117,7 @@ export default function Question({partName, questions, numberQuestion, elementIn
                         
                         return (
                             <RadioButton 
+                                partName={partName}
                                 questionIsSelected={questionIsSelected}
                                 character={character}
                                 key={index}

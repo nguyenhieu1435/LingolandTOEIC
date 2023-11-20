@@ -18,6 +18,8 @@ import { store } from "./src/redux/store";
 import { View } from "react-native";
 import { Text } from "react-native";
 import StatisticTraining from "./src/components/statistic_training";
+import TrainingPart2 from "./src/components/training_part2";
+import TrainingPart3 from "./src/components/training_part3";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -38,6 +40,8 @@ export default function App() {
                     <Stack.Screen name="StatisticTraining" component={StatisticTraining}
                         options={{headerShown: true, headerTitle: "Kết quả", }}
                     />
+                    <Stack.Screen name="TrainingPart2" component={TrainingPart2}/>
+                    <Stack.Screen name="TrainingPart3" component={TrainingPart3}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>

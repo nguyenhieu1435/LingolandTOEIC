@@ -2,14 +2,16 @@ import { Text, View, Image,  Pressable, ActivityIndicator } from "react-native";
 import { Foundation } from '@expo/vector-icons';
 import styles from "./style";
 import { useDispatch, useSelector } from "react-redux";
-import { getPart1Questions } from "../../redux/slices/part1Training";
 import { useEffect } from "react";
 import { setLoading } from "../../redux/slices/loading";
+import { getPart2Questions } from "../../redux/slices/part2Training";
+import { getPart1Questions } from "../../redux/slices/part1Training";
+import { getPart3Questions } from "../../redux/slices/part3Training";
 
 export const Item = function ({name , header, numberQuestion, capacity, vip, isActive, uri, navigation}) {
     const dispatch = useDispatch()
-    const part1Training = useSelector(state => state.part1Training)
-
+    
+    
 
     function handleChoosePart(){
         if (name === "Part 1"){
@@ -28,6 +30,34 @@ export const Item = function ({name , header, numberQuestion, capacity, vip, isA
                
             })
            
+        } else if (name === "Part 2"){
+            dispatch(setLoading(true));
+            dispatch(getPart2Questions({uri: uri})).unwrap()
+            .then(resp=>{
+                if (Array.isArray(resp)){
+                    dispatch(setLoading(false));
+                   
+                    navigation.navigate("TrainingPart2", {
+                        header: header,
+                        name: name,
+                        elementIndex: resp?.length > 0 ? 0 : null,
+                    })
+                } 
+               
+            })
+        } else if (name === "Part 3"){
+            dispatch(setLoading(true));
+            dispatch(getPart3Questions({uri: uri})).unwrap()
+            .then(resp=>{
+                if (Array.isArray(resp)){
+                    dispatch(setLoading(false));
+                    navigation.navigate("TrainingPart3", {
+                        header: header,
+                        name: name,
+                        elementIndex: resp?.length > 0 ? 0 : null,
+                    })
+                }
+            })
         }
     }
 

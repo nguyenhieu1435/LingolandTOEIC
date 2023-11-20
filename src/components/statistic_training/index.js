@@ -31,14 +31,21 @@ export default function StatisticTraining({navigation, route}) {
             setWrongAnswer(wrongAnswer);
             setNotAnswer(notAnswer);
 
-            setPieData([
-                {value: Math.floor((correctAnswer/total)*100), color: '#4BB543'
-                , text: `${Math.floor((correctAnswer/total)*100)}%`},
-                {value: Math.floor((wrongAnswer/total)*100), color: '#F44336'
-                , text: `${Math.floor((wrongAnswer/total)*100)}%`},
-                {value: Math.floor((notAnswer/total)*100), color: '#607D8B'
-                , text: `${Math.floor((notAnswer/total)*100)}%`},
-            ])
+            let arr = [];
+            if (correctAnswer > 0){
+                arr.push({value: Math.floor((correctAnswer/total)*100), color: '#4BB543'
+                , text: `${Math.floor((correctAnswer/total)*100)}%`})
+            }
+            if (wrongAnswer > 0){
+                arr.push({value: Math.floor((wrongAnswer/total)*100), color: '#F44336'
+                , text: `${Math.floor((wrongAnswer/total)*100)}%`})
+            }
+            if (notAnswer > 0){
+                arr.push({value: Math.floor((notAnswer/total)*100), color: '#607D8B'
+                , text: `${Math.floor((notAnswer/total)*100)}%`})
+            }
+
+            setPieData(arr)
         }
 
     }, [route.params])

@@ -7,7 +7,7 @@ import { Pressable } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import getAnswerCharacterByIndex from '../../utils/getAnswerCharacterByIndex'
 
-export default function ResultModal({questions, showModal, setShowModal, navigation}) {
+export default function ResultModal({questions, showModal, setShowModal, navigation, setIsPauseAudio, setIsPause}) {
 
     function getColorForAnswer(question, name){
         if (!question.yourAnswer){
@@ -105,6 +105,7 @@ export default function ResultModal({questions, showModal, setShowModal, navigat
                     </Pressable>
                     <Pressable style={{width: "48%"}}
                         onPress={()=> {
+                            setIsPauseAudio(true);
                             setShowModal(false)
                             navigation.navigate("StatisticTraining", {
                                 results: questions,

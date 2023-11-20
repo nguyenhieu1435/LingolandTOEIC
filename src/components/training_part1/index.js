@@ -4,15 +4,12 @@ import { useEffect, useRef, useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Audio } from 'expo-av';
 import AudioCustom from '../audio_speaker';
-import { Fontisto } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Question from '../question';
 import { useSelector } from 'react-redux';
 import ResultModal from '../result_modal';
 import { dataViewPart01 } from '../../data/dataViewPart1';
+import QuestionControl from '../question_control';
 
 
 
@@ -151,38 +148,16 @@ export default function TrainingPart1({navigation, route}) {
                                 isPause={isPause}
                                 setIsPause={setIsPause}
                             />
-                            <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-around", paddingVertical: 10, marginTop: 20}}>
-                                <Pressable
-                                    style={{padding: 15}}
-                                    onPress={handlePreviousQuestion}
-                                >
-                                    <Fontisto name="angle-left" size={20} color="black" />
-                                </Pressable>
-                                <Pressable
-                                    style={{padding: 15}}
-                                >
-                                    <Feather name="heart" size={20} color="black" />
-                                </Pressable>
-                                <Pressable
-                                     style={{padding: 15}}
-                                    onPress={()=> setQuestionOneSelected(true)}
-                                >
-                                    <MaterialCommunityIcons name="lightbulb-on-outline" size={24} color = {questionOneSelected ? "#1DB954" : "black"} />
-                                </Pressable>
-                                <Pressable
-                                     style={{padding: 15}}
-                                >
-                                    <Feather name="alert-triangle" size={20} color="black" />
-                                </Pressable>
-                                <Pressable
-                                    style={{padding: 15}}
-                                    onPress={handleNextQuestion}
-                                >
-                                    <Fontisto name="angle-right" size={20} color="black" />
-                                </Pressable>
-                            </View>
+                            <QuestionControl
+                                handlePreviousQuestion={handlePreviousQuestion}
+                                handleNextQuestion={handleNextQuestion}
+                                setAllQuestionSelected={setQuestionOneSelected}
+                                allQuestionSelected={questionOneSelected}
+                            />
+                            
                     </View>
                     <ResultModal
+                        setIsPauseAudio={setIsPause}
                         showModal={showModal}
                         setShowModal={setShowModal}
                         questions={questions}

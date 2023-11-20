@@ -22,6 +22,7 @@ export const PartItem = function ({ navigation, route }) {
                             width: "100%",
                         }}
                         data={data}
+                        //item is dataViewPartX.js
                         renderItem={({ item }) => {
                             return (
                                 <View style={{ alignItems: "center", justifyContent: "center" }}>
