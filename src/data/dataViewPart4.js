@@ -6,6 +6,7 @@ export const dataViewPart04 = [
         capacity: "13.2 MB",
         vip: false,
         isActive: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part4"
     },
     {
         id: 2,
@@ -13,6 +14,7 @@ export const dataViewPart04 = [
         numberQuestion: 30,
         capacity: "13.4 MB",
         vip: false,
+        uri: "https://n38s2n-3000.csb.app/de1-part4"
     },
     {
         id: 3,
@@ -20,6 +22,7 @@ export const dataViewPart04 = [
         numberQuestion: 30,
         capacity: "14.6 MB",
         vip: false,
+        uri: "https://n38s2n-3000.csb.app/de1-part4"
     },
     {
         id: 4,
@@ -34,6 +37,7 @@ export const dataViewPart04 = [
         numberQuestion: 30,
         capacity: "13.8 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part4"
     },
     {
         id: 6,

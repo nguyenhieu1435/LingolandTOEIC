@@ -178,6 +178,7 @@ export default function TrainingPart3({navigation, route}) {
                             </View>
                     </View>
                     <View style={{flex: 1, marginTop: 70}}>
+
                         <Animated.View
                                 style={[
                                     { flex: 1, padding: 10 },
@@ -242,13 +243,13 @@ export default function TrainingPart3({navigation, route}) {
                                                 
                                                     return (
                                                         <View key={index} style={{marginBottom: 10, flexDirection: "row"}}>
-                                                            <Text>
-                                                                <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{item.username}  </Text>
+                                                            <Text style={{fontSize: 16}}>
+                                                                <Text style={{ fontWeight: "500", color: "#ea7c4b"}}>{item.username}  </Text>
                                                                 {
                                                                     item?.spoilerNumber &&
                                                                     <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
                                                                 }
-                                                                <Text style={{fontSize: 15, color: "#000", flex: 1}}>{item.talk}</Text>
+                                                                <Text style={{fontSize: 16, color: "#000", flex: 1}}>{item.talk}</Text>
                                                             </Text>
                                                         </View>
                                                     )
@@ -258,13 +259,13 @@ export default function TrainingPart3({navigation, route}) {
                                                 data.transcriptVN?.map((item, index)=>{
                                                     return (
                                                         <View key={index} style={{marginBottom: 10, flexDirection: "row"}}>
-                                                            <Text>
-                                                                <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{item.username}  </Text>
+                                                            <Text style={{fontSize: 16}}>
+                                                                <Text style={{ fontWeight: "500", color: "#ea7c4b"}}>{item.username}  </Text>
                                                                 {
                                                                     item?.spoilerNumber &&
                                                                     <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
                                                                 }
-                                                                <Text style={{fontSize: 15, color: "#000", flex: 1}}>{item.talk}</Text>
+                                                                <Text style={{fontSize: 16, color: "#000", flex: 1}}>{item.talk}</Text>
                                                             </Text>
                                                         </View>
                                                     )
@@ -302,19 +303,19 @@ export default function TrainingPart3({navigation, route}) {
                                     indexOfQuestionDiferPart12={0}
                                     questionIsSelected={questionOneSelected}
                                     setQuestionSelected={setQuestionOneSelected}
-                                    numberQuestion={32 + elementIndex}
+                                    numberQuestion={32 + (elementIndex * 3)}
                                 />
                                 <Question partName="part3" questions={data?.questionList[1]} elementIndex={elementIndex} 
                                     indexOfQuestionDiferPart12={1}
                                     questionIsSelected={questionTwoSelected}
                                     setQuestionSelected={setQuesitonTwoSelected}
-                                    numberQuestion={33 + elementIndex}
+                                    numberQuestion={33 + (elementIndex * 3)}
                                 />
                                 <Question partName="part3" questions={data?.questionList[2]} elementIndex={elementIndex} 
                                     indexOfQuestionDiferPart12={2}
                                     questionIsSelected={questionThreeSelected}
                                     setQuestionSelected={setQuestionThreeSelected}
-                                    numberQuestion={34 + elementIndex}
+                                    numberQuestion={34 + (elementIndex * 3)}
                                 />
                             </ScrollView>
                         </Animated.View>

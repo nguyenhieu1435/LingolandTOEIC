@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Animated, LayoutAnimation } from 'react-native'
+import { View, Text, Pressable, Animated, LayoutAnimation} from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 import RadioButton from '../radio_button';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
@@ -10,6 +10,7 @@ import getSliceNameByPartName from '../../utils/getSliceNameByPartName';
 import { setAnswerByIndexPart2 } from '../../redux/slices/part2Training';
 import { MaterialIcons } from '@expo/vector-icons';
 import { setAnswerByIndexPart3 } from '../../redux/slices/part3Training';
+import { setAnswerByIndexPart4 } from '../../redux/slices/part4Training';
 
 
 export default function Question({partName, questions, numberQuestion, elementIndex, 
@@ -43,6 +44,10 @@ export default function Question({partName, questions, numberQuestion, elementIn
             if (state.questions[elementIndex].questionList[indexOfQuestionDiferPart12].yourAnswer && elementIndex >= 0 && elementIndex < state.questions.length){
                 setUserAnswer(state.questions[elementIndex]?.questionList[indexOfQuestionDiferPart12]?.yourAnswer)
             }
+        } else if (partName === "part4"){
+            if (state.questions[elementIndex].questionList[indexOfQuestionDiferPart12].yourAnswer && elementIndex >= 0 && elementIndex < state.questions.length){
+                setUserAnswer(state.questions[elementIndex]?.questionList[indexOfQuestionDiferPart12]?.yourAnswer);
+            }
         }
     }, [elementIndex])
    
@@ -59,6 +64,9 @@ export default function Question({partName, questions, numberQuestion, elementIn
             } else if (partName === "part3"){
                 dispatch(setAnswerByIndexPart3({index: elementIndex, userAnswer: userAnswer
                     , indexInQuestionList: indexOfQuestionDiferPart12}))
+            } else if (partName === "part4"){
+                dispatch(setAnswerByIndexPart4({index: elementIndex, userAnswer: userAnswer, 
+                    indexInQuestionList: indexOfQuestionDiferPart12}))
             }
 
         }

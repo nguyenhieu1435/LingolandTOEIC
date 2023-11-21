@@ -7,6 +7,7 @@ import { setLoading } from "../../redux/slices/loading";
 import { getPart2Questions } from "../../redux/slices/part2Training";
 import { getPart1Questions } from "../../redux/slices/part1Training";
 import { getPart3Questions } from "../../redux/slices/part3Training";
+import { getPart4Questions } from "../../redux/slices/part4Training";
 
 export const Item = function ({name , header, numberQuestion, capacity, vip, isActive, uri, navigation}) {
     const dispatch = useDispatch()
@@ -29,7 +30,6 @@ export const Item = function ({name , header, numberQuestion, capacity, vip, isA
                 } 
                
             })
-           
         } else if (name === "Part 2"){
             dispatch(setLoading(true));
             dispatch(getPart2Questions({uri: uri})).unwrap()
@@ -52,6 +52,19 @@ export const Item = function ({name , header, numberQuestion, capacity, vip, isA
                 if (Array.isArray(resp)){
                     dispatch(setLoading(false));
                     navigation.navigate("TrainingPart3", {
+                        header: header,
+                        name: name,
+                        elementIndex: resp?.length > 0 ? 0 : null,
+                    })
+                }
+            })
+        } else if (name === "Part 4"){
+            dispatch(setLoading(true));
+            dispatch(getPart4Questions({uri: uri})).unwrap()
+            .then(resp=>{
+                if (Array.isArray(resp)){
+                    dispatch(setLoading(false));
+                    navigation.navigate("TrainingPart4", {
                         header: header,
                         name: name,
                         elementIndex: resp?.length > 0 ? 0 : null,
