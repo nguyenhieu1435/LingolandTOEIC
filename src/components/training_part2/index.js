@@ -8,6 +8,7 @@ import ResultModal from '../result_modal';
 import AudioCustom from '../audio_speaker';
 import Question from '../question';
 import QuestionControl from '../question_control';
+import { dataViewPart02 } from '../../data/dataViewPart2';
 
 
 export default function TrainingPart2({navigation, route}) {
@@ -24,6 +25,10 @@ export default function TrainingPart2({navigation, route}) {
             setData(questions[elementIndex]);
         }
     }, [elementIndex]);
+
+    function handleSetSelected(){
+        setQuestionOneSelected(true);
+    }
 
     const handlePreviousQuestion = ()=>{
         setIsPause(true);
@@ -78,8 +83,12 @@ export default function TrainingPart2({navigation, route}) {
                                             <View style={{ flexDirection: "row",alignItems: "center", paddingVertical: 10}}>
                                                 <Pressable style={{width: "20%"}}
                                                 onPress={()=>{
-                                                        setIsPause(true)
-                                                        
+                                                    setIsPause(true)
+                                                    navigation.navigate("partItem", {
+                                                        name: "Part 2",
+                                                        title: "Hỏi và tả lời",
+                                                        data: dataViewPart02
+                                                    })
                                                 }}
                                                 >
                                                     <Ionicons name="arrow-back" size={24} color="black" 
@@ -135,7 +144,7 @@ export default function TrainingPart2({navigation, route}) {
                     <QuestionControl
                         handlePreviousQuestion={handlePreviousQuestion}
                         handleNextQuestion={handleNextQuestion}
-                        setAllQuestionSelected={setQuestionOneSelected}
+                        setAllQuestionSelected={handleSetSelected}
                         allQuestionSelected={questionOneSelected}
                     />
                 </View>

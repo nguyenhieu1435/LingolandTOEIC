@@ -26,7 +26,7 @@ export default function QuestionControl(
       </Pressable>
       <Pressable
         style={{ padding: 15 }}
-        onPress={() => setAllQuestionSelected(true)}
+        onPress={() => setAllQuestionSelected()}
       >
         <MaterialCommunityIcons
           name="lightbulb-on-outline"

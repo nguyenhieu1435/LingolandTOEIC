@@ -105,7 +105,9 @@ export default function ResultModal({questions, showModal, setShowModal, navigat
                     </Pressable>
                     <Pressable style={{width: "48%"}}
                         onPress={()=> {
-                            setIsPauseAudio(true);
+                            if (setIsPauseAudio){
+                                setIsPauseAudio(true);
+                            }
                             setShowModal(false)
                             navigation.navigate("StatisticTraining", {
                                 results: questions,

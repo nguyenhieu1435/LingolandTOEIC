@@ -11,6 +11,7 @@ import Question from '../question';
 import AudioCustom from '../audio_speaker';
 import QuestionControl from '../question_control';
 import ResultModal from '../result_modal';
+import { dataViewPart03 } from '../../data/dataViewPart3';
 
 
 export default function TrainingPart3({navigation, route}) {
@@ -151,7 +152,11 @@ export default function TrainingPart3({navigation, route}) {
                                     <Pressable style={{width: "20%"}}
                                         onPress={()=>{
                                             setIsPause(true)
-                                                            
+                                            navigation.navigate("partItem", {
+                                                name: "Part 3",
+                                                title: "Đoạn hội thoại",
+                                                data: dataViewPart03
+                                            })                
                                         }}
                                     >
                                         <Ionicons name="arrow-back" size={24} color="black" 

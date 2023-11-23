@@ -3,9 +3,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
 
 export default function AudioCustom({uri, isPause, setIsPause}) {
@@ -20,6 +17,7 @@ export default function AudioCustom({uri, isPause, setIsPause}) {
     const [percentProgress, setPercentProgress] = useState(0);
 
     useEffect(()=>{
+    
         const fnSetUp = async () => {
             const {sound, status} = await Audio.Sound.createAsync({uri: uri});
             while(true){
@@ -30,12 +28,14 @@ export default function AudioCustom({uri, isPause, setIsPause}) {
             sound.setIsLoopingAsync(false);
             sound.setVolumeAsync(1);
             sound.setRateAsync(speedCurrent);
-           
             sound.playAsync();
+            
             setAudio(sound);
         }
+
         fnSetUp();
-    },[])
+
+    }, [])
 
 
     useEffect(()=>{

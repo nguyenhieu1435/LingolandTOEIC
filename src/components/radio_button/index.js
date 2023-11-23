@@ -86,7 +86,7 @@ export default function RadioButton({character, question, systemAnswer, userAnsw
                             <MaterialIcons name="translate" size={18} color="#188DD8" 
                                 style={{padding: 15}}
                             />
-                            <Text style={{flex: 1,color: "#3FA0DE", fontWeight: "500", fontSize: 17 , paddingVertical: 15, paddingRight: 20}}
+                            <Text style={{flex: 1,color: "#3FA0DE", fontWeight: "500", fontSize: 17 , paddingVertical: 12, paddingRight: 20}}
                             >{question.explore}</Text>
                     
 
@@ -97,13 +97,16 @@ export default function RadioButton({character, question, systemAnswer, userAnsw
                     {
                         question.vocabulary
                         ?
-                        <View style={{flexDirection: "row",}}>
+                        <View style={{flexDirection: "row"}}>
                             <MaterialIcons name="highlight" 
                                 size={18} color="#188DD8" 
-                                style={{padding: 15}}
+                                style={{paddingHorizontal: 15, paddingVertical: 5}}
                             />
-                            <Text style={{flex: 1,color: "#3FA0DE", fontSize: 16,fontWeight: "500",  paddingVertical: 15,}}>{
+                            <Text style={{flex: 1,color: "#3FA0DE", fontSize: 17,fontWeight: "500",  paddingVertical: 5}}>{
                                 question.vocabulary.map((item, index)=>{
+                                    if (!item.eng){
+                                        return item.viet
+                                    }
                                     return `${item.eng} (${item.type}) ${item.viet}`
                                 }).join("; ")
 

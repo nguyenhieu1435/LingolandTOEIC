@@ -27,6 +27,10 @@ export default function TrainingPart1({navigation, route}) {
         }
     }, [elementIndex])
 
+    function handleSetSelected(){
+        setQuestionOneSelected(true);
+    }
+
     function handleNextQuestion(){
         setIsPause(true);
         if (elementIndex == questions.length-1){
@@ -151,7 +155,7 @@ export default function TrainingPart1({navigation, route}) {
                             <QuestionControl
                                 handlePreviousQuestion={handlePreviousQuestion}
                                 handleNextQuestion={handleNextQuestion}
-                                setAllQuestionSelected={setQuestionOneSelected}
+                                setAllQuestionSelected={handleSetSelected}
                                 allQuestionSelected={questionOneSelected}
                             />
                             

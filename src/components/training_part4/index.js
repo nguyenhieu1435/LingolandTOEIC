@@ -5,11 +5,13 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector, useDispatch } from 'react-redux';
 import Question from '../question';
 import AudioCustom from '../audio_speaker';
 import QuestionControl from '../question_control';
 import ResultModal from '../result_modal';
+import { setSelectedForIndexPart4 } from '../../redux/slices/part4Training';
+import { dataViewPart04 } from '../../data/dataViewPart4';
 
 
 export default function TrainingPart4({navigation, route}) {
@@ -19,7 +21,7 @@ export default function TrainingPart4({navigation, route}) {
     const [deviceHeight] = useState(Dimensions.get('window').height);
     const [isDividerClicked, setIsDividerClicked] = useState(false);
     const pan = useRef(new Animated.ValueXY()).current;
-
+    const dispatch = useDispatch();
 
     const {name, elementIndex, header} = route.params;
     const [data, setData] = useState(null);
@@ -62,6 +64,7 @@ export default function TrainingPart4({navigation, route}) {
     ).current;
 
     useEffect(()=>{
+
         if (allQuestionSelected){
             setTopHeight(deviceHeight/2 + 100);
             setBottomHeight(deviceHeight/2 - 100);
@@ -70,12 +73,31 @@ export default function TrainingPart4({navigation, route}) {
 
 
     useEffect(()=>{
+        setQuestionOneSelected(false);
+        setQuesitonTwoSelected(false);
+        setQuestionThreeSelected(false);
+        setAllQuestionSelected(false);
+        setIsSuggestEngsub(true);
+        setShowSuggest(true);
+        setIsPause(false);
+
         if (elementIndex != null && elementIndex >= 0 && elementIndex < questions.length){
             setData(questions[elementIndex]);
         }
+        if (questions[elementIndex].questionList[0].isSelected){
+            setQuestionOneSelected(true);
+        }
+        if (questions[elementIndex].questionList[1].isSelected){
+            setQuesitonTwoSelected(true);
+        }
+        if (questions[elementIndex].questionList[2].isSelected){
+            setQuestionThreeSelected(true);
+        }
+
     }, [elementIndex])
     
     useEffect(()=>{
+
         if (questionOneSelected && questionTwoSelected && questionThreeSelected){
             setAllQuestionSelected(true);
         } else {
@@ -86,6 +108,11 @@ export default function TrainingPart4({navigation, route}) {
 
 
     function setAllQuestionIsSelected(){
+    
+        dispatch(setSelectedForIndexPart4({
+            index: elementIndex,
+            
+        }))
         setQuestionOneSelected(true);
         setQuesitonTwoSelected(true);
         setQuestionThreeSelected(true);
@@ -124,8 +151,7 @@ export default function TrainingPart4({navigation, route}) {
                     }
                 }
             ]
-        )
-        } else {
+        )} else {
             navigation.push("TrainingPart4",{
                 name: name,
                 header: header,
@@ -153,7 +179,11 @@ export default function TrainingPart4({navigation, route}) {
                                     <Pressable style={{width: "20%"}}
                                         onPress={()=>{
                                             setIsPause(true)
-                                                            
+                                            navigation.navigate("partItem", {
+                                                name: "Part 4",
+                                                title: "Bài nói chuyện",
+                                                data: dataViewPart04
+                                            })    
                                         }}
                                     >
                                         <Ionicons name="arrow-back" size={24} color="black" 
@@ -233,85 +263,86 @@ export default function TrainingPart4({navigation, route}) {
                                                 </View>
                                             </View>
                                         </View>
+                                        {
+                                            showSuggest &&
+                                            <View style={{padding: 15, backgroundColor: "#fff"}}>
+                                                {
+                                                    isSuggestEngsub
+                                                    ?
+                                                    <View style={{marginBottom: 10, flexDirection: "row"}}>
+                                                            <Text>
+                                                                <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{data?.transcriptEN?.username}  </Text>
+                                                                {
+                                                                    data?.transcriptEN?.fulltalks?.map((item, index) => {
+                                                                        return (
+                                                                            <Text key={index} style={{fontSize: 16}}>
+                                                                                {
+                                                                                    item?.spoilerNumber &&
+                                                                                    <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
+                                                                                }
+                                                                                <Text style={{fontSize: 16, color: "#000", fontWeight: item?.spoilerNumber ? 700: 400,flex: 1}}>{item.talk}</Text>
+                                                                            </Text>
+                                                                        )
+                                                                    })  
+                                                                }
+                                                            </Text>
+                                                    </View>
+                                                    :
+                                                    <View style={{marginBottom: 10, flexDirection: "row"}}>
+                                                            <Text>
+                                                                <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{data?.transcriptVN?.username}  </Text>
+                                                                {
+                                                                    data?.transcriptVN?.fulltalks?.map((item, index) => {
+                                                                        return (
+                                                                            <Text key={index} style={{fontSize: 16}}>
+                                                                                {
+                                                                                    item?.spoilerNumber &&
+                                                                                    <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
+                                                                                }
+                                                                                <Text style={{fontSize: 16, color: "#000",fontWeight: item?.spoilerNumber ? 700: 400, flex: 1}}>{item.talk}</Text>
+                                                                            </Text>
+                                                                        )
+                                                                    })  
+                                                                }
+                                                            </Text>
+                                                    </View>
+                                                    // data.transcriptEN?.map((item, index)=>{
+                                                    
+                                                    //     return (
+                                                    //         <View key={index} style={{marginBottom: 10, flexDirection: "row"}}>
+                                                    //             <Text>
+                                                    //                 <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{item.username}  </Text>
+                                                    //                 {
+                                                    //                     item?.spoilerNumber &&
+                                                    //                     <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
+                                                    //                 }
+                                                    //                 <Text style={{fontSize: 15, color: "#000", flex: 1}}>{item.talk}</Text>
+                                                    //             </Text>
+                                                    //         </View>
+                                                    //     )
+                                                    
+                                                    // })
+                                                    // :
+                                                    // data.transcriptVN?.map((item, index)=>{
+                                                    //     return (
+                                                    //         <View key={index} style={{marginBottom: 10, flexDirection: "row"}}>
+                                                    //             <Text>
+                                                    //                 <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{item.username}  </Text>
+                                                    //                 {
+                                                    //                     item?.spoilerNumber &&
+                                                    //                     <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
+                                                    //                 }
+                                                    //                 <Text style={{fontSize: 15, color: "#000", flex: 1}}>{item.talk}</Text>
+                                                    //             </Text>
+                                                    //         </View>
+                                                    //     )
+                                                    
+                                                    // })
+                                                }
+                                            </View>
+                                        }
                                     </View>
-                                    {
-                                        showSuggest &&
-                                        <View style={{padding: 15, backgroundColor: "#fff"}}>
-                                             {
-                                                isSuggestEngsub
-                                                ?
-                                                <View style={{marginBottom: 10, flexDirection: "row"}}>
-                                                        <Text>
-                                                            <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{data?.transcriptEN?.username}  </Text>
-                                                            {
-                                                                data?.transcriptEN?.fulltalks?.map((item, index) => {
-                                                                    return (
-                                                                        <Text key={index} style={{fontSize: 16}}>
-                                                                            {
-                                                                                item?.spoilerNumber &&
-                                                                                <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
-                                                                            }
-                                                                            <Text style={{fontSize: 16, color: "#000", fontWeight: item?.spoilerNumber ? 700: 400,flex: 1}}>{item.talk}</Text>
-                                                                        </Text>
-                                                                    )
-                                                                })  
-                                                            }
-                                                        </Text>
-                                                </View>
-                                                :
-                                                <View style={{marginBottom: 10, flexDirection: "row"}}>
-                                                        <Text>
-                                                            <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{data?.transcriptVN?.username}  </Text>
-                                                            {
-                                                                data?.transcriptVN?.fulltalks?.map((item, index) => {
-                                                                    return (
-                                                                        <Text key={index} style={{fontSize: 16}}>
-                                                                            {
-                                                                                item?.spoilerNumber &&
-                                                                                <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
-                                                                            }
-                                                                            <Text style={{fontSize: 16, color: "#000",fontWeight: item?.spoilerNumber ? 700: 400, flex: 1}}>{item.talk}</Text>
-                                                                        </Text>
-                                                                    )
-                                                                })  
-                                                            }
-                                                        </Text>
-                                                </View>
-                                                // data.transcriptEN?.map((item, index)=>{
-                                                
-                                                //     return (
-                                                //         <View key={index} style={{marginBottom: 10, flexDirection: "row"}}>
-                                                //             <Text>
-                                                //                 <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{item.username}  </Text>
-                                                //                 {
-                                                //                     item?.spoilerNumber &&
-                                                //                     <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
-                                                //                 }
-                                                //                 <Text style={{fontSize: 15, color: "#000", flex: 1}}>{item.talk}</Text>
-                                                //             </Text>
-                                                //         </View>
-                                                //     )
-                                                
-                                                // })
-                                                // :
-                                                // data.transcriptVN?.map((item, index)=>{
-                                                //     return (
-                                                //         <View key={index} style={{marginBottom: 10, flexDirection: "row"}}>
-                                                //             <Text>
-                                                //                 <Text style={{fontSize: 15, fontWeight: "500", color: "#ea7c4b"}}>{item.username}  </Text>
-                                                //                 {
-                                                //                     item?.spoilerNumber &&
-                                                //                     <Text style={{color: "#4AB542"}}>{item.spoilerNumber} </Text>
-                                                //                 }
-                                                //                 <Text style={{fontSize: 15, color: "#000", flex: 1}}>{item.talk}</Text>
-                                                //             </Text>
-                                                //         </View>
-                                                //     )
-                                                
-                                                // })
-                                            }
-                                        </View>
-                                    }
+                                    
                                 </ScrollView>
                         </Animated.View>
                         {

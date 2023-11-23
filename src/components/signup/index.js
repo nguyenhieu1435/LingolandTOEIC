@@ -2,7 +2,7 @@ import { View, Text, StatusBar, SafeAreaView, TextInput, Pressable } from 'react
 import { Ionicons } from '@expo/vector-icons';
 import styles from './style'
 import { Image } from 'react-native'
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
