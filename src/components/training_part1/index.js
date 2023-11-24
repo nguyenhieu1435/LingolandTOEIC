@@ -6,10 +6,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import AudioCustom from '../audio_speaker';
 import Question from '../question';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ResultModal from '../result_modal';
 import { dataViewPart01 } from '../../data/dataViewPart1';
 import QuestionControl from '../question_control';
+import { setSelectedForIndexPart1 } from '../../redux/slices/part1Training';
 
 
 
@@ -20,14 +21,19 @@ export default function TrainingPart1({navigation, route}) {
     const [questionOneSelected, setQuestionOneSelected] = useState(false)
     const [isPause, setIsPause] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(()=>{
+        if (questions[elementIndex]?.isSelected){
+            setQuestionOneSelected(true);
+        }
         if (elementIndex != null && elementIndex >= 0 && elementIndex < questions.length){
             setData(questions[elementIndex]);
         }
     }, [elementIndex])
 
     function handleSetSelected(){
+        dispatch(setSelectedForIndexPart1({index: elementIndex}))
         setQuestionOneSelected(true);
     }
 

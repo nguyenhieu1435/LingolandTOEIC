@@ -6,12 +6,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
 import { StatusBar } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Question from '../question';
 import AudioCustom from '../audio_speaker';
 import QuestionControl from '../question_control';
 import ResultModal from '../result_modal';
 import { dataViewPart03 } from '../../data/dataViewPart3';
+import { setSelectedForIndexPart3 } from '../../redux/slices/part3Training';
 
 
 export default function TrainingPart3({navigation, route}) {
@@ -21,7 +22,7 @@ export default function TrainingPart3({navigation, route}) {
     const [deviceHeight] = useState(Dimensions.get('window').height);
     const [isDividerClicked, setIsDividerClicked] = useState(false);
     const pan = useRef(new Animated.ValueXY()).current;
-
+    const dispatch = useDispatch();
 
 
     const {name, elementIndex, header} = route.params;
@@ -71,6 +72,15 @@ export default function TrainingPart3({navigation, route}) {
     ).current;
 
     useEffect(()=>{
+        if (question[elementIndex].questionList[0].isSelected){
+            setQuestionOneSelected(true);
+        }
+        if (question[elementIndex].questionList[1].isSelected){
+            setQuesitonTwoSelected(true);
+        }
+        if (question[elementIndex].questionList[2].isSelected){
+            setQuestionThreeSelected(true);
+        }
         if (elementIndex != null && elementIndex >= 0 && elementIndex < question.length){
             setData(question[elementIndex]);
         }
@@ -94,6 +104,9 @@ export default function TrainingPart3({navigation, route}) {
     }
 
     function setAllQuestionIsSelected(){
+        dispatch(setSelectedForIndexPart3({
+            index: elementIndex
+        }))
         setQuestionOneSelected(true);
         setQuesitonTwoSelected(true);
         setQuestionThreeSelected(true);
@@ -165,7 +178,7 @@ export default function TrainingPart3({navigation, route}) {
                                     </Pressable>
                                         <View style={{flexGrow: 1}}>
                                             <Text style={{fontSize: 17, fontWeight: "500"}}>{header}</Text>
-                                            <Text style={{color: "#20BB55"}}>Câu hỏi {elementIndex+32} -  {elementIndex+32+2} / {32} - {32 + (question.length * 3)}</Text>
+                                            <Text style={{color: "#20BB55"}}>Câu hỏi {elementIndex+32} -  {elementIndex+32+2} / {32} - {34 + ((question.length-1) * 3)}</Text>
                                         </View>
                                         <View style={{flexDirection: "row", alignItems: "center"}}>
                                         <Pressable

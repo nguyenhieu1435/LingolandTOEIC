@@ -2,8 +2,8 @@ import axios from "axios";
 
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
-export const getPart3Questions = createAsyncThunk(
-    "part3/getPart3Questions",
+export const getPart6Questions = createAsyncThunk(
+    "part6/getPart6Questions",
     async (params, thunkAPI) => {
         const uri  = params.uri ?? null;
         if (uri){
@@ -16,6 +16,7 @@ export const getPart3Questions = createAsyncThunk(
                     return {
                         ...question,
                         yourAnswer: null,
+                        isSelected: false,
                     }
                 })
                 return {
@@ -39,46 +40,49 @@ const initialState = {
     isError: false,
     isSuccess: false
 }
-const part3Slice = createSlice({
-    name: "part3",
+
+const part6Slice = createSlice({
+    name: "part6",
     initialState: initialState,
     reducers: {
-        setAnswerByIndexPart3(state, action){
+        setAnswerByIndexPart6(state, action){
             if (action.payload?.index >= state.questions.length){
                 return;
             }
-            // need logic here
-            state.questions[action.payload.index].questionList[action.payload.indexInQuestionList].yourAnswer = action.payload.userAnswer;
+            state.questions[action.payload.index].questionList[action.payload.indexInQuestionList].yourAnswer 
+            = action.payload.userAnswer;
+            state.questions[action.payload.index].questionList[action.payload.indexInQuestionList].isSelected = true;
         },
-        setSelectedForIndexPart3(state, action){
+        setSelectedForIndexPart6(state, action){
             if (action.payload?.index >= state.questions.length){
                 return;
             }
             state.questions[action.payload.index].questionList[0].isSelected = true;
             state.questions[action.payload.index].questionList[1].isSelected = true;
             state.questions[action.payload.index].questionList[2].isSelected = true;
+            state.questions[action.payload.index].questionList[3].isSelected = true;
         }
     },
     extraReducers: builder => {
-        builder.addCase(getPart3Questions.pending, (state, action) => {
+        builder.addCase(getPart6Questions.pending, (state, action) => {
             state.isLoading = true;
             state.isError = false;
             state.isSuccess = false;
         })
-        builder.addCase(getPart3Questions.fulfilled, (state, action) => {
-            state.isLoading = false
-            state.isError = false
-            state.isSuccess = true
-            state.questions = action.payload
-            console.log(action.payload)
+        builder.addCase(getPart6Questions.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isError = false;
+            state.isSuccess = true;
+            state.questions = action.payload;
         })
-        builder.addCase(getPart3Questions.rejected, (state, action) => {
-            state.isLoading = false
-            state.isError = true
-            state.isSuccess = false
+        builder.addCase(getPart6Questions.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.isSuccess = false;
         })
     }
 })
 
-export const { setAnswerByIndexPart3, setSelectedForIndexPart3 } = part3Slice.actions;
-export default part3Slice.reducer;
+
+export const { setAnswerByIndexPart6, setSelectedForIndexPart6 } = part6Slice.actions;
+export default part6Slice.reducer;

@@ -12,6 +12,7 @@ export const getPart2Questions = createAsyncThunk(
                 return {
                     ...item,
                     yourAnswer: null,
+                    isSelected: false,
                 }
             })
             return res.data;
@@ -41,6 +42,13 @@ const part2Slice = createSlice({
                 return;
             }
             state.questions[action.payload.index].yourAnswer = action.payload.userAnswer;
+            state.questions[action.payload.index].isSelected = true;
+        },
+        setSelectedForIndexPart2(state, action){
+            if (action.payload?.index >= state.questions.length){
+                return;
+            }
+            state.questions[action.payload.index].isSelected = true;
         }
     },
     extraReducers: builder => {
@@ -64,7 +72,7 @@ const part2Slice = createSlice({
     }
 })
 
-export const { setAnswerByIndexPart2 } = part2Slice.actions;
+export const { setAnswerByIndexPart2, setSelectedForIndexPart2} = part2Slice.actions;
 export default part2Slice.reducer;
 
 

@@ -16,6 +16,7 @@ import TrainingPart2 from "./src/components/training_part2";
 import TrainingPart3 from "./src/components/training_part3";
 import TrainingPart4 from "./src/components/training_part4";
 import TrainingPart5 from "./src/components/training_part5";
+import TrainingPart6 from "./src/components/training_part6";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -23,7 +24,7 @@ export default function App() {
         <Provider store={store}>
             <NavigationContainer>
                 <Stack.Navigator screenOptions={{ headerShown: false }}
-                    initialRouteName="Training"
+                    initialRouteName="LoadingPage"
                 >
                     <Stack.Screen name="Training" component={Training} />
                     <Stack.Screen name="partItem" component={PartItem} />
@@ -40,6 +41,7 @@ export default function App() {
                     <Stack.Screen name="TrainingPart3" component={TrainingPart3}/>
                     <Stack.Screen name="TrainingPart4" component={TrainingPart4}/>
                     <Stack.Screen name="TrainingPart5" component={TrainingPart5}/>
+                    <Stack.Screen name="TrainingPart6" component={TrainingPart6}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>

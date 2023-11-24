@@ -1,4 +1,4 @@
-import { View, Text, StatusBar, SafeAreaView, TextInput, Pressable } from 'react-native'
+import { View, Text, StatusBar, SafeAreaView, TextInput, Pressable, Alert, ActivityIndicator } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import styles from './style'
 import { Image } from 'react-native'
@@ -36,10 +36,38 @@ export default function SignUp({navigation}) {
     });
     const [toggleShowPasswordSignUp, setToggleShowPasswordSignUp] = useState(false);
     const [toggleShowPasswordConfirmSignUp, setToggleShowPasswordConfirmSignUp] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const submitSignUp = (data) => {
+    const submitSignUp = async (paramUser) => {
         if (isValid2){
-            console.log(data)
+            setIsLoading(true);
+            
+            const resp = await fetch('https://n38s2n-3000.csb.app/accounts');
+            const data = await resp.json();
+            const checkUsername = data.find((item) => item.username === paramUser.usernameSignUp);
+            if (checkUsername){
+                setIsLoading(false);
+                Alert.alert('Thông báo', 'Username đã tồn tại');
+                return;
+
+            } else {
+
+                const resp = await fetch('https://n38s2n-3000.csb.app/accounts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: paramUser.usernameSignUp,
+                        password: paramUser.passwordSignUp
+                    })
+                });
+                setIsLoading(false);
+                const respSignUp = await resp.json();
+                Alert.alert('Thông báo', 'Đăng ký thành công');
+                navigation.navigate('SignIn');
+            
+            }
         }
     }
   return (
@@ -139,7 +167,13 @@ export default function SignUp({navigation}) {
             <Pressable
                 onPress={handleSubmit2(submitSignUp)}
             >
-                <Text style={styles.btnSubmitLogin}>Xác nhận</Text>
+                {
+                    isLoading
+                    ?
+                    <Text style={styles.btnSubmitLogiLoading}><ActivityIndicator size={'large'} /></Text>
+                    :
+                    <Text style={styles.btnSubmitLogin}>Đăng Ký</Text>
+                }
             </Pressable>
 
 

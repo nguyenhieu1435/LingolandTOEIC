@@ -8,6 +8,7 @@ import { dataViewPart04 } from "../../data/dataViewPart4";
 import { dataViewPart05 } from "../../data/dataViewPart5";
 import { dataViewPart06 } from "../../data/dataViewPart6";
 import { dataViewPart07 } from "../../data/dataViewPart7";
+import { useSelector } from "react-redux";
 
 export default function Training({ navigation }) {
     const data = [
@@ -19,6 +20,8 @@ export default function Training({ navigation }) {
         dataViewPart06,
         dataViewPart07,
     ];
+    const account = useSelector(state => state.account.account);
+
     return (
         <View style={{ flex: 1 }}>
             <StatusBar />
@@ -32,7 +35,7 @@ export default function Training({ navigation }) {
                                     resizeMode="contain"
                                     style={styles.avatarImage}
                                 />
-                                <Text style={styles.titleUsername}>User name</Text>
+                                <Text style={styles.titleUsername}>{account ? account.username : ""}</Text>
                             </View>
                             <Pressable style={styles.boxUpgradePremium}>
                                 <Image

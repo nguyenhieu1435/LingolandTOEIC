@@ -6,6 +6,7 @@ export const dataViewPart06 = [
         capacity: "0.1 MB",
         vip: false,
         isActive: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part6"
     },
     {
         id: 2,
@@ -13,6 +14,7 @@ export const dataViewPart06 = [
         numberQuestion: 16,
         capacity: "0.1 MB",
         vip: false,
+        uri: "https://n38s2n-3000.csb.app/de1-part6"
     },
     {
         id: 3,
@@ -20,6 +22,7 @@ export const dataViewPart06 = [
         numberQuestion: 16,
         capacity: "0.1 MB",
         vip: false,
+        uri: "https://n38s2n-3000.csb.app/de1-part6"
     },
     {
         id: 4,
@@ -27,6 +30,7 @@ export const dataViewPart06 = [
         numberQuestion: 16,
         capacity: "0.1 MB",
         vip: false,
+        uri: "https://n38s2n-3000.csb.app/de1-part6"
     },
     {
         id: 5,
@@ -34,6 +38,7 @@ export const dataViewPart06 = [
         numberQuestion: 16,
         capacity: "0.1 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part6"
     },
     {
         id: 6,
@@ -41,6 +46,7 @@ export const dataViewPart06 = [
         numberQuestion: 16,
         capacity: "0.1 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part6"
     },
     {
         id: 7,
@@ -48,6 +54,7 @@ export const dataViewPart06 = [
         numberQuestion: 16,
         capacity: "0.1 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part6"
     },
     {
         id: 8,
@@ -55,6 +62,7 @@ export const dataViewPart06 = [
         numberQuestion: 16,
         capacity: "0.1 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part6"
     },
     {
         id: 9,
@@ -62,6 +70,7 @@ export const dataViewPart06 = [
         numberQuestion: 16,
         capacity: "0.1 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part6"
     },
     {
         id: 10,
@@ -69,5 +78,6 @@ export const dataViewPart06 = [
         numberQuestion: 16,
         capacity: "0.1 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part6"
     },
 ];

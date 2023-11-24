@@ -9,6 +9,7 @@ import AudioCustom from '../audio_speaker';
 import Question from '../question';
 import QuestionControl from '../question_control';
 import { dataViewPart02 } from '../../data/dataViewPart2';
+import { setSelectedForIndexPart2 } from '../../redux/slices/part2Training';
 
 
 export default function TrainingPart2({navigation, route}) {
@@ -18,15 +19,19 @@ export default function TrainingPart2({navigation, route}) {
     const questions = useSelector(state => state.part2Training.questions)
     const [data, setData] = useState(null);
     const [questionOneSelected, setQuestionOneSelected] = useState(false);
-    
+    const dispatch = useDispatch();
 
     useEffect(()=>{
+        if (questions[elementIndex]?.isSelected){
+            setQuestionOneSelected(true);
+        }
         if (elementIndex != null && elementIndex >= 0 && elementIndex < questions.length){
             setData(questions[elementIndex]);
         }
     }, [elementIndex]);
 
     function handleSetSelected(){
+        dispatch(setSelectedForIndexPart2({index: elementIndex}))
         setQuestionOneSelected(true);
     }
 

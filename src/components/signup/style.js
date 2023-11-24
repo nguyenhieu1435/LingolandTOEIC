@@ -36,6 +36,15 @@ export default StyleSheet.create({
         paddingHorizontal: 50,
         borderRadius: 15,
     },
+    btnSubmitLogiLoading:{
+        marginTop: 20,
+        backgroundColor: "#48B759",
+        color: "#fff",
+        fontSize: 20,
+        paddingVertical: 4,
+        paddingHorizontal: 50,
+        borderRadius: 15,
+    },
     errorMsg: {
         color: "red",
         position: "absolute",

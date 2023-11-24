@@ -1,4 +1,4 @@
-import { View, Text, StatusBar, SafeAreaView, TextInput, Pressable } from 'react-native'
+import { View, Text, StatusBar, SafeAreaView, TextInput, Pressable, ActivityIndicator, Alert } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import styles from './style'
 import { Image } from 'react-native'
@@ -6,6 +6,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from "axios";
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchSignIn } from '../../redux/slices/account';
 
 const schema = yup.object().shape({
     username: yup.string().required('Username không được để trống')
@@ -30,11 +33,25 @@ export default function SignIn({navigation}) {
         resolver: yupResolver(schema),
 
     });
+    const account = useSelector(state => state.account);
+    const dispatch = useDispatch();
 
     const [toggleShowPassword, setToggleShowPassword] = useState(false);
-    const submitLogin = (data) => {
-        if (isValid){
-            console.log(data)
+    const submitLogin = async (data) => {
+        if (isValid && !account.isLoading){
+            dispatch(fetchSignIn({username: data.username, password: data.password}))
+            .unwrap()
+            .then(resp=>{
+                console.log(resp)
+                if (resp.length === 0){
+                    Alert.alert('Thông báo', 'Tài khoản hoặc mật khẩu không đúng');
+                    return;
+                }
+                navigation.navigate('Training')
+            })
+            .catch(err=>{
+                Alert.alert('Thông báo', 'Tài khoản hoặc mật khẩu không đúng');
+            })
         }
     }
   return (
@@ -101,7 +118,15 @@ export default function SignIn({navigation}) {
             <Pressable
                 onPress={handleSubmit(submitLogin)}
             >
-                <Text style={styles.btnSubmitLogin}>Xác nhận</Text>
+                {
+                    account.isLoading
+                    ?
+                    
+                    <Text style={styles.btnSubmitLogiLoading}><ActivityIndicator size={'large'} /></Text>
+                    :
+                    <Text style={styles.btnSubmitLogin}>Xác nhận</Text>
+                }
+               
             </Pressable>
 
 

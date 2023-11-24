@@ -1,7 +1,8 @@
-import { View, Text, Pressable, Animated, LayoutAnimation} from 'react-native'
+import { View, Text, Pressable, Animated} from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 import RadioButton from '../radio_button';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useEffect, useLayoutEffect,  useState } from 'react';
 import getAnswerCharacterByIndex from '../../utils/getAnswerCharacterByIndex';
 import { useDispatch } from 'react-redux';
 import { setAnswerByIndex } from '../../redux/slices/part1Training';
@@ -11,6 +12,7 @@ import { setAnswerByIndexPart2 } from '../../redux/slices/part2Training';
 import { MaterialIcons } from '@expo/vector-icons';
 import { setAnswerByIndexPart3 } from '../../redux/slices/part3Training';
 import { setAnswerByIndexPart4 } from '../../redux/slices/part4Training';
+import { setAnswerByIndexPart6 } from '../../redux/slices/part6Training';
 
 
 export default function Question({partName, questions, numberQuestion, elementIndex, 
@@ -30,6 +32,7 @@ export default function Question({partName, questions, numberQuestion, elementIn
     useLayoutEffect(()=>{
         // set user answer for question if it has been choosen
         // add else if, if add new part
+        setUserAnswer(null);
         if (partName === "part1"){
            
             if (state.questions[elementIndex].yourAnswer && elementIndex >= 0 && elementIndex < state.questions.length){
@@ -48,9 +51,13 @@ export default function Question({partName, questions, numberQuestion, elementIn
             if (state.questions[elementIndex].questionList[indexOfQuestionDiferPart12].yourAnswer && elementIndex >= 0 && elementIndex < state.questions.length){
                 setUserAnswer(state.questions[elementIndex]?.questionList[indexOfQuestionDiferPart12]?.yourAnswer);
             }
+        } else if (partName === "part6"){
+            if (state.questions[elementIndex].questionList[indexOfQuestionDiferPart12].yourAnswer && elementIndex >= 0 && elementIndex < state.questions.length){
+                setUserAnswer(state.questions[elementIndex]?.questionList[indexOfQuestionDiferPart12]?.yourAnswer);
+            }
         }
     }, [elementIndex])
-   
+
     // redux reducer, set question, which is selected by user 
     // add else if, if add new part
     useEffect(()=>{
@@ -66,6 +73,9 @@ export default function Question({partName, questions, numberQuestion, elementIn
                     , indexInQuestionList: indexOfQuestionDiferPart12}))
             } else if (partName === "part4"){
                 dispatch(setAnswerByIndexPart4({index: elementIndex, userAnswer: userAnswer, 
+                    indexInQuestionList: indexOfQuestionDiferPart12}))
+            } else if (partName === "part6"){
+                dispatch(setAnswerByIndexPart6({index: elementIndex, userAnswer: userAnswer, 
                     indexInQuestionList: indexOfQuestionDiferPart12}))
             }
 
@@ -88,7 +98,7 @@ export default function Question({partName, questions, numberQuestion, elementIn
             , paddingHorizontal: 10, }}>
                 <View>
                     <Text style={{fontSize: 16, fontWeight: "600", color: "#fff"}}>{numberQuestion} 
-                        {(questions?.questionNameEN && questionIsSelected) || (partName != "part1" && partName != "part2") ? `. ${questions.questionNameEN}` : ""}
+                        {(questions?.questionNameEN && questionIsSelected) || (partName != "part1" && partName != "part2") ? `. ${questions?.questionNameEN}` : ""}
                     </Text>
                 </View>
                 <Pressable style={{marginRight: 10}}
@@ -114,6 +124,18 @@ export default function Question({partName, questions, numberQuestion, elementIn
                     />
                     <Text style={{fontSize: 16, color: "#2A96DB", flexShrink: 1, flexWrap: 'wrap'}}>
                         {questions.questionNameVN}
+                    </Text>
+
+                </View>
+            }
+            {
+                questions?.explain && questionIsSelected && showContent &&
+                <View style={{flexDirection: "row", backgroundColor: "#EAF4FB", paddingVertical: 10}}>
+                    <MaterialCommunityIcons name="lightbulb-on-outline"  size={20} color="#2A96DB"
+                        style={{marginHorizontal: 10, paddingVertical: 8}}
+                    />
+                    <Text style={{fontSize: 16, color: "#2A96DB", flexShrink: 1, flexWrap: 'wrap'}}>
+                        {questions.explain}
                     </Text>
 
                 </View>

@@ -111,7 +111,6 @@ export default function TrainingPart4({navigation, route}) {
     
         dispatch(setSelectedForIndexPart4({
             index: elementIndex,
-            
         }))
         setQuestionOneSelected(true);
         setQuesitonTwoSelected(true);
@@ -192,7 +191,7 @@ export default function TrainingPart4({navigation, route}) {
                                     </Pressable>
                                         <View style={{flexGrow: 1}}>
                                             <Text style={{fontSize: 17, fontWeight: "500"}}>{header}</Text>
-                                            <Text style={{color: "#20BB55"}}>Câu hỏi {elementIndex+71} - {elementIndex+71+2} / {71} - {71 + (questions.length * 3)}</Text>
+                                            <Text style={{color: "#20BB55"}}>Câu hỏi {(elementIndex*3)+71} - {(elementIndex*3)+73} / {71} - {73 + ((questions.length-1) * 3)}</Text>
                                         </View>
                                         <View style={{flexDirection: "row", alignItems: "center"}}>
                                         <Pressable

@@ -1,14 +1,14 @@
-import { Text, View, Image,  Pressable, ActivityIndicator } from "react-native";
+import { Text, View, Image,  Pressable} from "react-native";
 import { Foundation } from '@expo/vector-icons';
 import styles from "./style";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { setLoading } from "../../redux/slices/loading";
 import { getPart2Questions } from "../../redux/slices/part2Training";
 import { getPart1Questions } from "../../redux/slices/part1Training";
 import { getPart3Questions } from "../../redux/slices/part3Training";
 import { getPart4Questions } from "../../redux/slices/part4Training";
 import { getPart5Questions } from "../../redux/slices/part5Training";
+import { getPart6Questions } from "../../redux/slices/part6Training";
 
 export const Item = function ({name , header, numberQuestion, capacity, vip, isActive, uri, navigation}) {
     const dispatch = useDispatch()
@@ -31,6 +31,7 @@ export const Item = function ({name , header, numberQuestion, capacity, vip, isA
                 } 
                
             })
+            .catch(err => setLoading(false))
         } else if (name === "Part 2"){
             dispatch(setLoading(true));
             dispatch(getPart2Questions({uri: uri})).unwrap()
@@ -46,6 +47,7 @@ export const Item = function ({name , header, numberQuestion, capacity, vip, isA
                 } 
                
             })
+            .catch(err => setLoading(false))
         } else if (name === "Part 3"){
             dispatch(setLoading(true));
             dispatch(getPart3Questions({uri: uri})).unwrap()
@@ -59,6 +61,7 @@ export const Item = function ({name , header, numberQuestion, capacity, vip, isA
                     })
                 }
             })
+            .catch(err => setLoading(false))
         } else if (name === "Part 4"){
             dispatch(setLoading(true));
             dispatch(getPart4Questions({uri: uri})).unwrap()
@@ -72,6 +75,7 @@ export const Item = function ({name , header, numberQuestion, capacity, vip, isA
                     })
                 }
             })
+            .catch(err => setLoading(false))
         } else if (name === "Part 5"){
             dispatch(setLoading(true));
             dispatch(getPart5Questions({uri: uri})).unwrap()
@@ -85,6 +89,21 @@ export const Item = function ({name , header, numberQuestion, capacity, vip, isA
                     })
                 }
             })
+            .catch(err => setLoading(false))
+        } else if (name === "Part 6"){
+            dispatch(setLoading(true));
+            dispatch(getPart6Questions({uri: uri})).unwrap()
+            .then(resp => {
+                if (Array.isArray(resp)){
+                    dispatch(setLoading(false));
+                    navigation.navigate("TrainingPart6", {
+                        header: header,
+                        name: name,
+                        elementIndex: resp?.length > 0 ? 0 : null,
+                    })
+                }
+            })
+            .catch(err => setLoading(false))
         }
     }
 
