@@ -42,7 +42,6 @@ export default function SignIn({navigation}) {
             dispatch(fetchSignIn({username: data.username, password: data.password}))
             .unwrap()
             .then(resp=>{
-                console.log(resp)
                 if (resp.length === 0){
                     Alert.alert('Thông báo', 'Tài khoản hoặc mật khẩu không đúng');
                     return;

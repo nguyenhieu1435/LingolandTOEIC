@@ -6,7 +6,9 @@ import part3TrainingReducer from './slices/part3Training';
 import part4TrainingReducer from './slices/part4Training';
 import part5TrainingReducer from './slices/part5Training';
 import part6TrainingReducer from './slices/part6Training';
+import part7TrainingReducer from './slices/part7Training';
 import accountReducer from "./slices/account";
+
 
 export const store = configureStore({
     reducer: {
@@ -18,5 +20,6 @@ export const store = configureStore({
       part4Training: part4TrainingReducer,
       part5Training: part5TrainingReducer,
       part6Training: part6TrainingReducer,
+      part7Training: part7TrainingReducer,
     },
 });

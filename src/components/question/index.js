@@ -13,6 +13,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { setAnswerByIndexPart3 } from '../../redux/slices/part3Training';
 import { setAnswerByIndexPart4 } from '../../redux/slices/part4Training';
 import { setAnswerByIndexPart6 } from '../../redux/slices/part6Training';
+import { setAnswerByIndexPart7 } from '../../redux/slices/part7Training';
 
 
 export default function Question({partName, questions, numberQuestion, elementIndex, 
@@ -32,6 +33,7 @@ export default function Question({partName, questions, numberQuestion, elementIn
     useLayoutEffect(()=>{
         // set user answer for question if it has been choosen
         // add else if, if add new part
+        setShowContent(true);
         setUserAnswer(null);
         if (partName === "part1"){
            
@@ -52,6 +54,10 @@ export default function Question({partName, questions, numberQuestion, elementIn
                 setUserAnswer(state.questions[elementIndex]?.questionList[indexOfQuestionDiferPart12]?.yourAnswer);
             }
         } else if (partName === "part6"){
+            if (state.questions[elementIndex].questionList[indexOfQuestionDiferPart12].yourAnswer && elementIndex >= 0 && elementIndex < state.questions.length){
+                setUserAnswer(state.questions[elementIndex]?.questionList[indexOfQuestionDiferPart12]?.yourAnswer);
+            }
+        } else if (partName === "part7"){
             if (state.questions[elementIndex].questionList[indexOfQuestionDiferPart12].yourAnswer && elementIndex >= 0 && elementIndex < state.questions.length){
                 setUserAnswer(state.questions[elementIndex]?.questionList[indexOfQuestionDiferPart12]?.yourAnswer);
             }
@@ -77,6 +83,9 @@ export default function Question({partName, questions, numberQuestion, elementIn
             } else if (partName === "part6"){
                 dispatch(setAnswerByIndexPart6({index: elementIndex, userAnswer: userAnswer, 
                     indexInQuestionList: indexOfQuestionDiferPart12}))
+            } else if (partName === "part7"){
+                dispatch(setAnswerByIndexPart7({index: elementIndex, userAnswer: userAnswer, 
+                    indexInQuestionList: indexOfQuestionDiferPart12}))
             }
 
         }
@@ -93,7 +102,7 @@ export default function Question({partName, questions, numberQuestion, elementIn
         shadowRadius: 1.41,
         
         elevation: 2,}}>
-            <View style={{height: 50, width: "100%", backgroundColor: "#2196F3"
+            <View style={{minHeight: 50, width: "100%", backgroundColor: "#2196F3", paddingVertical: 6
             , flexDirection: "row", alignItems: 'center', justifyContent: "space-between"
             , paddingHorizontal: 10, }}>
                 <View>
