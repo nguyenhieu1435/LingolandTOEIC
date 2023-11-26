@@ -15,7 +15,44 @@ import { URLVOCABYLARY, color_success, rootColor } from '../InitData/init';
 import { useEffect, useRef, useState } from 'react';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { VocabularySlice } from '../../redux/store';
+import { Audio } from 'expo-av';
 export const WordDetail = function () {
+    const [sound, setSound] = useState();
+    const [isPlay, setPlay] = useState(false);
+    async function playSound(URI) {
+        console.log('Loading Sound');
+        setPlay(true);
+        let audioSource;
+        if (URI) {
+            audioSource = { uri: URI };
+        } else {
+            audioSource = require('../../../assets/sound/linkdemo.mp3');
+        }
+        const { sound } = await Audio.Sound.createAsync(audioSource);
+        setSound(sound);
+
+        console.log('Playing Sound');
+        await sound.playAsync();
+    }
+    async function stopSound() {
+        if (sound) {
+            console.log('Stopping Sound');
+            await sound.stopAsync();
+            console.log('Unloading Sound');
+            await sound.unloadAsync();
+            setSound(null);
+            // setPlay(false);
+        }
+    }
+    useEffect(() => {
+        return sound
+            ? () => {
+                  console.log('Unloading Sound');
+                  sound.unloadAsync();
+              }
+            : undefined;
+    }, [sound]);
+
     // console.log('------------WordDetail--------------');
     const data = useSelector((state) => state.vocabulary.toppicSelect.vocabularies);
     const bottomSheetRef = useRef(null);
@@ -65,7 +102,11 @@ export const WordDetail = function () {
                 >
                     <View style={styles.contentContainer}>
                         <View style={[styles.grSubTop]}>
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    stopSound();
+                                }}
+                            >
                                 <Ionicons name='warning' color={rootColor} size={30} />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {}}>
@@ -129,6 +170,17 @@ export const WordDetail = function () {
                                         ]}
                                         onPress={() => {
                                             console.log('------------SOUND-------');
+                                            console.log(
+                                                '--------->>',
+                                                wordDetailSelect.sound,
+                                                '<<--------------'
+                                            );
+                                            isPlay
+                                                ? stopSound()
+                                                : playSound(
+                                                      wordDetailSelect.sound ||
+                                                          'https://res.cloudinary.com/dttv3mbki/video/upload/v1701003059/sourceproject/h5fvwpenjsyzqnzcnsjm.mp3'
+                                                  );
                                         }}
                                     >
                                         <Ionicons
