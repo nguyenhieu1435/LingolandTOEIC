@@ -21,13 +21,15 @@ import TrainingPart6 from './src/components/training_part6';
 import TrainingPart7 from './src/components/training_part7';
 import LoadingOverLay from './src/components/loadingoverlay';
 import { View } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TabVocabulary } from './src/View/TabVocabulary/TabVocabulary';
 import { Toppic } from './src/View/Toppic/Toppic';
 import { WordDetail } from './src/View/WordDetail/WordDetail';
 import { HeaderWord } from './src/components/HeaderWord/HeaderWord';
 import { useSelector } from 'react-redux';
+import SettingPage from './src/View/settingpage';
+import { rootColor } from './src/View/InitData/init';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -64,6 +66,19 @@ function HomeTabs() {
                     tabBarInactiveTintColor: '#666',
                 })}
             />
+            <Tab.Screen
+                name='SettingPage'
+                component={SettingPage}
+                options={({ navigation }) => ({
+                    tabBarIcon: ({ color, size, focused }) => (
+                        <Ionicons name='menu' color={focused ? rootColor : '#666'} size={24} />
+                        // <Feather name='menu' size={24} color={focused ? '#1DB954' : '#666'} />
+                    ),
+                    tabBarLabel: navigation.isFocused() ? 'Menu' : '',
+                    tabBarActiveTintColor: '#1DB954',
+                    tabBarInactiveTintColor: '#666',
+                })}
+            />
         </Tab.Navigator>
     );
 }
@@ -91,7 +106,10 @@ export default function App() {
     return (
         <Provider store={store}>
             <NavigationContainer>
-                <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='HomeTabs'>
+                <Stack.Navigator
+                    screenOptions={{ headerShown: false }}
+                    initialRouteName='LoadingPage'
+                >
                     <Stack.Screen name='LoadingPage' component={LoadingPage} />
                     <Stack.Screen name='PickRemindTime' component={PickRemindTime} />
                     <Stack.Screen name='SignIn' component={SignIn} />
