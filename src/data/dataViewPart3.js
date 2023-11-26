@@ -30,6 +30,7 @@ export const dataViewPart03 = [
         numberQuestion: 39,
         capacity: "8.7 MB",
         vip: false,
+        uri: "https://n38s2n-3000.csb.app/de1-part3"
     },
     {
         id: 5,
@@ -37,6 +38,7 @@ export const dataViewPart03 = [
         numberQuestion: 39,
         capacity: "8.7 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part3"
     },
     {
         id: 6,
@@ -44,6 +46,7 @@ export const dataViewPart03 = [
         numberQuestion: 39,
         capacity: "8.7 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part3"
     },
     {
         id: 7,
@@ -51,6 +54,7 @@ export const dataViewPart03 = [
         numberQuestion: 39,
         capacity: "8.7 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part3"
     },
     {
         id: 8,
@@ -58,6 +62,7 @@ export const dataViewPart03 = [
         numberQuestion: 39,
         capacity: "8.7 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part3"
     },
     {
         id: 9,
@@ -65,6 +70,7 @@ export const dataViewPart03 = [
         numberQuestion: 39,
         capacity: "8.7 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part3"
     },
     {
         id: 10,
@@ -72,5 +78,6 @@ export const dataViewPart03 = [
         numberQuestion: 39,
         capacity: "8.7 MB",
         vip: true,
+        uri: "https://n38s2n-3000.csb.app/de1-part3"
     },
 ];

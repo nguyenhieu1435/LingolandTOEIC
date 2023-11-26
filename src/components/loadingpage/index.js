@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 export default function LoadingPage({navigation}) {
   useEffect(()=>{
     setTimeout(()=>{
-      navigation.navigate('SignIn')
+      navigation.navigate('PickRemindTime')
     }, 3000)
   }, [])
   return (

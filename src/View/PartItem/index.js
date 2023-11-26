@@ -5,7 +5,9 @@ import { Item } from "../../components/ItemView";
 import LoadingOverLay from "../../components/loadingoverlay";
 
 
+
 export const PartItem = function ({ navigation, route }) {
+  
     const { name, title, data } = route.params;
 
     return (
@@ -42,9 +44,8 @@ export const PartItem = function ({ navigation, route }) {
                         keyExtractor={(item) => item.id.toString()}
                     />
                 </View>
-                
+                <LoadingOverLay/>
             </View>
-            <LoadingOverLay/>
         </SafeAreaView>
     );
 };

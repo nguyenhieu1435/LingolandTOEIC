@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import styles from './styles'
 import { useEffect, useLayoutEffect, useState } from 'react';
 
-export default function PickRemindTime() {
+export default function PickRemindTime({navigation}) {
     const [dateRemind, setDateRemind] = useState(new Date());
     const [isEnabled, setIsEnabled] = useState(false);
     const [isPickShow, setIsPickShow] = useState(false);
@@ -65,7 +65,11 @@ export default function PickRemindTime() {
                     onChange={changeDateRemind}
                   />
                 }
-                <Pressable style={{width: "100%", alignItems: "center", marginTop: 40}}>
+                <Pressable style={{width: "100%", alignItems: "center", marginTop: 40}}
+                    onPress={()=>{
+                        navigation.navigate("SignIn");
+                    }}
+                >
                     <Text style={styles.textSubmitRemind}>OK</Text>
                 </Pressable>
             </View>

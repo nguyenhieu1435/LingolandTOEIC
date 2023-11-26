@@ -46,7 +46,7 @@ export default function SignIn({navigation}) {
                     Alert.alert('Thông báo', 'Tài khoản hoặc mật khẩu không đúng');
                     return;
                 }
-                navigation.navigate('Training')
+                navigation.navigate('HomeTabs')
             })
             .catch(err=>{
                 Alert.alert('Thông báo', 'Tài khoản hoặc mật khẩu không đúng');

@@ -2,6 +2,7 @@ import { View, Text, Pressable, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import styles from "./style";
+
 export default function TraningPartItem({
     title,
     name,

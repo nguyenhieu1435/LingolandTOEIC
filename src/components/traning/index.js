@@ -9,8 +9,13 @@ import { dataViewPart05 } from "../../data/dataViewPart5";
 import { dataViewPart06 } from "../../data/dataViewPart6";
 import { dataViewPart07 } from "../../data/dataViewPart7";
 import { useSelector } from "react-redux";
+import { Entypo } from '@expo/vector-icons';
+import { useEffect } from "react";
+
 
 export default function Training({ navigation }) {
+
+
     const data = [
         dataViewPart01,
         dataViewPart02,
