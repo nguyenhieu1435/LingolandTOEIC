@@ -16,11 +16,11 @@
 
 ## 🚩 Table of Contents
 
-- [Build With](#-Built-With)
-- [Installation](#-installation)
-- [Dependencies](#-dependencies)
-- [Features](#-features)
-- [Contact](#-contact)
+- [Build With](#built-with)
+- [Installation](#installation)
+- [Dependencies](#dependencies)
+- [Features](#features)
+- [Contact](#contact)
 
 ### Built With
 
