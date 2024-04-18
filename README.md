@@ -157,7 +157,11 @@ Nguyễn Văn Hiếu - hieurio12@gmail.com
 
 Project Link: https://github.com/nguyenhieu1435/LingolandTOEIC
 
+[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=nguyenhieu1435&theme=vue-dark&date_format=j%2Fn%5B%2FY%5D)](https://git.io/streak-stats)
 
+<img align="center" src="https://github-readme-stats.vercel.app/api?username=nguyenhieu1435&show_icons=true&include_all_commits=true&theme=cobalt&hide_border=true" alt="My github stats" /> 
+
+<img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=nguyenhieu1435&layout=compact&theme=cobalt&hide_border=true" />
 
 
 
